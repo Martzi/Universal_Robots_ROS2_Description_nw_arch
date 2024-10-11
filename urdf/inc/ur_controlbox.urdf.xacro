@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro"
+       name="controlbox">
+
+  <xacro:include filename="$(find interface_description)/urdf/usb30.urdf.xacro"/>
+  <xacro:include filename="$(find interface_description)/urdf/usb20.urdf.xacro"/>
+  <xacro:include filename="$(find interface_description)/urdf/cat6.urdf.xacro"/>
+
+  <xacro:macro name="controlbox" params="parent *origin tf_prefix id:=0">
+    <xacro:property name="M_PI" value="3.1415926535897931" />
+
+    <joint name="${tf_prefix}controlbox" type="fixed">
+      <xacro:insert_block name="origin" />
+      <parent link="${parent}" />
+      <child link="controlbox-${id}-link" />
+    </joint>
+
+    <link name="controlbox-${id}-link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="file://$(find ur_description)/meshes/common/simplify_control-box.stl" scale="0.001 0.001 0.001" />
+        </geometry>
+        <!-- <material name="plastic"/> -->
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="file://$(find ur_description)/meshes/common/simplify_control-box.stl" scale="0.001 0.001 0.001" />
+        </geometry>
+      </collision>
+    </link>
+
+    <!-- controlbox device-layer topology -->
+    <node>
+      <node-id>controlbox-${id}-node</node-id>
+                  
+      <dl:device-layer-node-attributes xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer">
+        <dl:device-name>controlbox-${id}</dl:device-name>
+        <dl:device-type>controlbox</dl:device-type>
+        <dl:weight>3000</dl:weight>
+      </dl:device-layer-node-attributes>
+
+      <xacro:cat6 parent="controlbox-${id}-link" prefix="controlbox-${id}" id="0" origin_xyz="0.04 0.068 0.032" origin_rpy="-1.5707963 0 0"/>
+
+      <xacro:usb30 parent="controlbox-${id}-link" prefix="controlbox-${id}" id="0" origin_xyz="0.087 0.119 0.019" origin_rpy="1.57 1.57 0"/>
+      <xacro:usb30 parent="controlbox-${id}-link" prefix="controlbox-${id}" id="1" origin_xyz="0.075 0.119 0.0199" origin_rpy="1.57 1.57 0"/>
+
+    </node>
+
+
+  </xacro:macro>
+</robot>
