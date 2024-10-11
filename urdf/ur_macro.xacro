@@ -52,6 +52,8 @@
 
   <xacro:include filename="$(find ur_description)/urdf/inc/ur_transmissions.xacro" />
   <xacro:include filename="$(find ur_description)/urdf/inc/ur_common.xacro" />
+  <!-- control box extension -->
+  <xacro:include filename="$(find ur_description)/urdf/inc/ur_controlbox.urdf.xacro" />
 
   <xacro:macro name="ur_robot" params="
     name
@@ -104,6 +106,9 @@
       visual_parameters_file="${visual_parameters_file}"
       force_abs_paths="${sim_gazebo or sim_ignition}"/>
 
+    <xacro:controlbox parent="${tf_prefix}base_link" tf_prefix="${tf_prefix}">
+      <origin xyz="-1.5 0 0.1" rpy="0 ${pi} ${pi}"/>
+    </xacro:controlbox>
 
     <xacro:if value="${generate_ros2_control_tag}">
       <!-- ros2 control include -->
