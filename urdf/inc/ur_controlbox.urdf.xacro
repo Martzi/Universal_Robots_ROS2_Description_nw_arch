@@ -19,14 +19,14 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="file://$(find ur_description)/meshes/common/simplify_control-box.stl" scale="0.001 0.001 0.001" />
+          <mesh filename="file://$(find ur_description)/meshes/common/control-box-simplified.stl" scale="0.001 0.001 0.001" />
         </geometry>
         <!-- <material name="plastic"/> -->
       </visual>
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="file://$(find ur_description)/meshes/common/simplify_control-box.stl" scale="0.001 0.001 0.001" />
+          <mesh filename="file://$(find ur_description)/meshes/common/control-box-simplified.stl" scale="0.001 0.001 0.001" />
         </geometry>
       </collision>
     </link>
