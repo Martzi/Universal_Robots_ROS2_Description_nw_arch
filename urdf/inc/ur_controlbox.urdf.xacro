@@ -38,7 +38,6 @@
       <dl:device-layer-node-attributes xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer">
         <dl:device-name>controlbox-${id}</dl:device-name>
         <dl:device-type>controlbox</dl:device-type>
-        <dl:weight>3000</dl:weight>
       </dl:device-layer-node-attributes>
 
       <xacro:cat6 parent="controlbox-${id}-link" prefix="controlbox-${id}" id="0" origin_xyz="0.04 0.068 0.032" origin_rpy="-1.5707963 0 0"/>
